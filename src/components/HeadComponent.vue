@@ -1,21 +1,35 @@
 <template>
-  <h3>Head</h3>
+  <div class="head-container bg-info">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="/"
+          ><router-link to="/" class="text-white">Home</router-link></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"
+          ><router-link to="/form" class="text-white">Form</router-link></a
+        >
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Options, Vue } from "vue-class-component";
 
 @Options({
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 })
 export default class HeadComponent extends Vue {
-  msg!: string
+  msg!: string;
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.head-container {
+}
 </style>
