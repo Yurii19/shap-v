@@ -30,6 +30,6 @@ export default class HeadComponent extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.head-container {
-}
+/* .head-container {
+} */
 </style>

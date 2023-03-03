@@ -24,11 +24,8 @@
           @input="updateDeviceInput($event)"
         />
       </div>
-      <!-- <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div> -->
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+      <button type="" class="btn btn-warning" @click.prevent="clearInputs()">Clear</button>
     </form>
   </section>
 </template>
@@ -52,6 +49,12 @@ export default class Form extends Vue {
     console.log(this.nameInput);
     console.log(this.deviceInput);
   }
+
+clearInputs(){
+  this.nameInput = ''
+  this.deviceInput = ''
+}
+
   updateNameInput(e: Event) {
     const input = e.target as HTMLInputElement;
     this.nameInput = input.value;

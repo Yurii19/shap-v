@@ -11,6 +11,6 @@ export default class Home extends Vue {}
 </script>
  
 <style scoped >
-.home {
-}
+/* .home {
+} */
 </style>
