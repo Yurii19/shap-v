@@ -29,7 +29,7 @@ export default class App extends Vue {}
   /* margin-top: 60px; */
 }
 .router-link-active {
-  border-bottom: 2px solid yellow;
+  color: yellow !important;
 }
 .router-link-exact-active {
   /* border: 1px solid blue; */

@@ -18,20 +18,35 @@
         <label for="exampleInputPassword1">Device</label>
         <input
           type="text"
-           :value="deviceInput"
+          :value="deviceInput"
           class="form-control"
           id="exampleInputPassword1"
           @input="updateDeviceInput($event)"
         />
       </div>
       <button type="submit" class="btn btn-primary mr-2">Submit</button>
-      <button type="" class="btn btn-warning" @click.prevent="clearInputs()">Clear</button>
+      <button
+        type="button"
+        class="btn btn-warning"
+        @click.prevent="clearInputs()"
+      >
+        Clear
+      </button>
+      <GoogleSignInButton
+        @success="handleLoginSuccess"
+        @error="handleLoginError"
+      ></GoogleSignInButton>
     </form>
   </section>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import {
+ // GoogleSignInButton,
+  type CredentialResponse,
+} from 'vue3-google-signin';
+
 @Options({
   props: {
     name: String,
@@ -43,6 +58,14 @@ export default class Form extends Vue {
   deviceInput: string = '';
 
   // methods section
+  handleLoginError = () => {
+    console.error('Login failed');
+  };
+
+  handleLoginSuccess = (response: CredentialResponse) => {
+    const { credential } = response;
+    console.log('Access Token', credential);
+  };
 
   submitForm() {
     //e.preventDefault();
@@ -50,17 +73,17 @@ export default class Form extends Vue {
     console.log(this.deviceInput);
   }
 
-clearInputs(){
-  this.nameInput = ''
-  this.deviceInput = ''
-}
+  clearInputs() {
+    this.nameInput = '';
+    this.deviceInput = '';
+  }
 
   updateNameInput(e: Event) {
     const input = e.target as HTMLInputElement;
     this.nameInput = input.value;
   }
 
-   updateDeviceInput(e: Event) {
+  updateDeviceInput(e: Event) {
     const input = e.target as HTMLInputElement;
     this.deviceInput = input.value;
   }
