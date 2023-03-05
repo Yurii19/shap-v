@@ -25,7 +25,7 @@
         />
       </div>
       <button type="submit" class="btn btn-primary mr-2">Submit</button>
-      <button type="" class="btn btn-warning" @click.prevent="clearInputs()">Clear</button>
+      <button type="button" class="btn btn-warning" @click.prevent="clearInputs()">Clear</button>
     </form>
   </section>
 </template>
