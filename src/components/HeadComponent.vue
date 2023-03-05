@@ -1,5 +1,5 @@
 <template>
-  <div class="head-container bg-info">
+  <div class="head-container bg-info d-flex justify-content-between">
     <ul class="nav">
       <li class="nav-item">
         <a class="nav-link active" href="/"
@@ -12,11 +12,19 @@
         >
       </li>
     </ul>
+    <GoogleSignInButton
+      @success="handleLoginSuccess"
+      @error="handleLoginError"
+    ></GoogleSignInButton>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Options, Vue } from 'vue-class-component';
+import {
+  // GoogleSignInButton,
+  type CredentialResponse,
+} from 'vue3-google-signin';
 
 @Options({
   props: {
@@ -25,6 +33,15 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class HeadComponent extends Vue {
   msg!: string;
+
+  handleLoginError = () => {
+    console.error('Login failed');
+  };
+
+  handleLoginSuccess = (response: CredentialResponse) => {
+    const { credential } = response;
+    console.log('Access Token', credential);
+  };
 }
 </script>
 
