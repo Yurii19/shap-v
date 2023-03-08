@@ -12,6 +12,21 @@
         >
       </li>
     </ul>
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenu2"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Show credential
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <span><b>Email: </b>{{ userCredentials.email }}</span>
+      </div>
+    </div>
     <div class="d-flex">
       <button @click="logOut">Log out</button>
       <GoogleSignInButton
@@ -23,20 +38,29 @@
 </template>
 
 <script>
-import { GoogleSignInButton } from 'vue3-google-signin';
+import { GoogleSignInButton, decodeCredential } from 'vue3-google-signin';
 export default {
   components: { GoogleSignInButton },
+  data() {
+    return {
+      userCredentials: { email: 'unlogined' },
+    };
+  },
   methods: {
-    logOut(){
-      console.log('Logging out')
+    logOut() {
+      const cc = this.$cookies;
+      //cc.remove('g_state')
+      console.log(cc.keys());
+      //console.log(cc)
     },
 
     handleLoginError: () => {
       console.error('Login failed');
     },
 
-    handleLoginSuccess: (response) => {
+    handleLoginSuccess(response) {
       const { credential } = response;
+      this.userCredentials = decodeCredential(credential);
       console.log('Access Token', credential);
     },
   },

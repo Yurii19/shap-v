@@ -5,6 +5,7 @@ import HomePage from './views/HomePage.vue';
 import FormPage from './views/FormPage.vue';
 import GoogleSignInPlugin from 'vue3-google-signin';
 import { CLIENT_ID } from './variables/constants';
+import VueCookies from 'vue3-cookies';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,5 +21,6 @@ app.use(GoogleSignInPlugin, {
 });
 
 app.use(router);
+app.use(VueCookies);
 
 app.mount('#app');
