@@ -13,7 +13,7 @@
       </li>
     </ul>
     <div class="d-flex">
-      <button>Log out</button>
+      <button @click="logOut">Log out</button>
       <GoogleSignInButton
         @success="handleLoginSuccess"
         @error="handleLoginError"
@@ -27,6 +27,10 @@ import { GoogleSignInButton } from 'vue3-google-signin';
 export default {
   components: { GoogleSignInButton },
   methods: {
+    logOut(){
+      console.log('Logging out')
+    },
+
     handleLoginError: () => {
       console.error('Login failed');
     },
