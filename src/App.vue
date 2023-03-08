@@ -27,5 +27,8 @@ export default {
   /* margin-top: 60px; */
 
 }
+iframe {
+  margin: 0 !important;
+}
 
 </style>

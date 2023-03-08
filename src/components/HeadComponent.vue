@@ -13,20 +13,30 @@
       </li>
     </ul>
     <div class="d-flex">
-      <button >Log out</button>
-      <!-- <GoogleSignInButton
+      <button>Log out</button>
+      <GoogleSignInButton
         @success="handleLoginSuccess"
         @error="handleLoginError"
-      ></GoogleSignInButton> -->
+      ></GoogleSignInButton>
     </div>
   </div>
 </template>
 
-<script >
+<script>
+import { GoogleSignInButton } from 'vue3-google-signin';
+export default {
+  components: { GoogleSignInButton },
+  methods: {
+    handleLoginError: () => {
+      console.error('Login failed');
+    },
 
-export default  {
-
- }
+    handleLoginSuccess: (response) => {
+      const { credential } = response;
+      console.log('Access Token', credential);
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
