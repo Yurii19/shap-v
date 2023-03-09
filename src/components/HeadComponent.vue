@@ -28,7 +28,8 @@
       </div>
     </div>
     <div class="d-flex">
-      <button @click="logOut">Log out</button>
+      <button @click="logout">Log out</button>
+      <button @click="login">Log In</button>
       <GoogleSignInButton
         @success="handleLoginSuccess"
         @error="handleLoginError"
@@ -38,10 +39,10 @@
 </template>
 
 <script>
-//import { CLIENT_ID, REDIRECT_URI, SCOPES } from '@/variables/constants';
+import { CLIENT_ID, SCOPES } from '@/variables/constants';
+//import { REDIRECT_URI } from '@/variables/constants';
 import { GoogleSignInButton, decodeCredential } from 'vue3-google-signin';
 import { useCodeClient } from 'vue3-google-signin';
-// import { getCurrentInstance } from 'vue';
 // import { useGsiScript ,useGoogleAuth } from 'vue3-google-signin';
 //import { CLIENT_ID } from '@/variables/constants';
 
@@ -54,31 +55,15 @@ import { useCodeClient } from 'vue3-google-signin';
 
 export default {
   setup() {
-    // const { isReady, login, logout, setAccessToken, error } = useCodeClient({
-    //   clientId: CLIENT_ID,
-    //   redirectUri: REDIRECT_URI,
-    //   scope: SCOPES,
-    //   prompt: 'consent',
-    // });
-    // const cbTest = async (response) => {
-    //   const res = await response.getClient()
-    //   console.log(res)
-    // };
+    const { isReady, login, logout, setAccessToken, error, getClient, client } =
+      useCodeClient({
+        clientId: CLIENT_ID,
+        // redirectUri: REDIRECT_URI,
+        scope: SCOPES,
+        prompt: 'consent',
+      });
 
-    const { getClient, client } = useCodeClient({
-      onSuccess: async ()=>{
-        const pp = getClient()
-        console.log('pp -> ', pp)
-        
-        window.localStorage.setItem('gapi', 'pp');
-      },
-      onError(){
-        console.log('error')
-      }
-    });
-    //const gapi = getClient();
-
-    return {  client };
+    return { client, isReady, login, logout, setAccessToken, error, getClient };
   },
   components: { GoogleSignInButton },
   data() {
@@ -88,20 +73,8 @@ export default {
   },
   methods: {
     logOut() {
-      // const cc = this.$cookies;
       console.log(window.localStorage);
-      console.log('client -> ',this.client);
-      // console.log(cc.keys());
-      //const theClient = this.getClient()
-      // console.log(
-      //   'scriptLoaded: ',
-      //   this.isReady,
-      //   this.login,
-      //   this.logout,
-      //   this.setAccessToken,
-      //   this.error,
-      //   this.getClient
-      // );
+      console.log('client -> ', this.client);
     },
 
     handleLoginError: () => {
@@ -111,11 +84,6 @@ export default {
     handleLoginSuccess(response) {
       const { credential } = response;
       this.userCredentials = decodeCredential(credential);
-      // const auth = new GoogleAuth ({
-      //   clienId: CLIENT_ID
-      // })
-      // const client = auth.client;
-      // console.log('Access Token', client);
       console.log('Access Token', credential);
     },
   },
